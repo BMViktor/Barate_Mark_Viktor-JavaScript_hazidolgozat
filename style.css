@@ -1,0 +1,412 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap');
+
+/* ============================================================
+   ALAP BEÁLLÍTÁSOK
+   ============================================================ */
+
+:root {
+  --bg: #0f0f13;
+  --surface: #1a1a22;
+  --border: #2e2e3e;
+  --text: #e8e8f0;
+  --muted: #6b6b80;
+  --magas: #ff4d6d;
+  --kozepes: #ffd166;
+  --alacsony: #06d6a0;
+  --accent: #a78bfa;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  min-height: 100vh;
+  padding: 40px 24px;
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(167, 139, 250, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 100%, rgba(6, 214, 160, 0.06) 0%, transparent 60%);
+}
+
+/* ============================================================
+   FEJLÉC
+   ============================================================ */
+
+h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, #e8e8f0 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 6px;
+}
+
+/* Számláló bekezdés */
+p {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================
+   SZŰRŐ GOMBOK
+   (az oldal tetején lévő "Mind", "Elvégzett", "Aktív" gombok)
+   ============================================================ */
+
+body>button {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.5px;
+  margin-right: 8px;
+  margin-bottom: 24px;
+}
+
+body>button:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ============================================================
+   KÁRTYÁK
+   ============================================================ */
+
+.kartya {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.kartya:hover {
+  border-color: #3e3e52;
+  transform: translateY(-1px);
+}
+
+/* Bal oldali színes csík prioritás szerint */
+.kartya::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 3px 0 0 3px;
+}
+
+.kartya.magas::before {
+  background: var(--magas);
+}
+
+.kartya.kozepes::before {
+  background: var(--kozepes);
+}
+
+.kartya.alacsony::before {
+  background: var(--alacsony);
+}
+
+/* Elvégzett kártya */
+.kartya.elvegzett {
+  opacity: 0.45;
+}
+
+.kartya.elvegzett p {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+/* ============================================================
+   KÁRTYÁN BELÜLI ELEMEK
+   ============================================================ */
+
+/* A feladat neve */
+.kartya p {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 3px;
+  letter-spacing: 0;
+}
+
+/* A prioritás szövege (span) */
+.kartya span {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================
+   KÁRTYÁN BELÜLI GOMBOK
+   ============================================================ */
+
+.kartya button {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  padding: 6px 13px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+  margin-left: auto;
+}
+
+/* Kész / Visszavonás gomb */
+.kartya button:first-of-type {
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+}
+
+.kartya button:first-of-type:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Törlés gomb */
+.kartya button:last-of-type {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  margin-left: 8px;
+}
+
+.kartya button:last-of-type:hover {
+  border-color: var(--magas);
+  color: var(--magas);
+}
+
+
+/* ==============================================================
+ Új feladat bevitelének sora
+================================================================7 */
+.uj-feladat {
+  display: flex;
+  gap: 12px;
+  margin: 25px 0;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+/* Input és select mezők */
+.uj-feladat input,
+.uj-feladat select {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.2s;
+}
+
+.uj-feladat input:focus,
+.uj-feladat select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+/* Hozzáadás gomb */
+.uj-feladat button {
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  transition: 0.25s;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.95rem;
+}
+
+.uj-feladat button:hover {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+
+/* Lenyíló opciók */
+.uj-feladat select option {
+  background: var(--surface);
+  color: var(--text);
+  padding: 10px;
+}
+
+/* Azonnali */
+.uj-feladat select.azonnali {
+  background: #ff4d4d;
+  color: white;
+}
+
+/* Tervezett */
+.uj-feladat select.tervezett {
+  background: #ffcc00;
+  color: black;
+}
+
+/* Ráérős */
+.uj-feladat select.raeros {
+  background: #4dff4d;
+  color: black;
+}
+
+
+
+
+
+
+/* ============================================================
+   RESZPONZÍV MÉRETEZÉS (EGYMÁS ALATTI LAYOUT)
+   ============================================================ */
+
+
+
+/* Desktop */
+@media (min-width: 1200px) {
+  body {
+    padding: 80px 200px;
+  }
+
+  h1 {
+    font-size: 3.4rem;
+  }
+
+  .kartya {
+    padding: 26px 30px;
+    gap: 20px;
+  }
+
+  .kartya p {
+    font-size: 1.25rem;
+  }
+
+  .kartya span {
+    font-size: 0.9rem;
+  }
+
+  .kartya button {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+
+  body>button {
+    font-size: 0.9rem;
+    padding: 10px 22px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 800px) {
+  body {
+    padding: 60px 80px;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .kartya {
+    padding: 22px 26px;
+    gap: 18px;
+  }
+
+  .kartya p {
+    font-size: 1.15rem;
+  }
+
+  .kartya span {
+    font-size: 0.8rem;
+  }
+
+  .kartya button {
+    font-size: 0.8rem;
+    padding: 8px 16px;
+  }
+
+  body>button {
+    font-size: 0.85rem;
+    padding: 9px 20px;
+  }
+}
+
+/* Telefon */
+@media (max-width: 600px) {
+  body {
+    padding: 40px 60px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .kartya {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px 18px;
+  }
+
+  .kartya button {
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  body>button {
+    width: 100%;
+    margin-right: 0;
+
+  }
+
+  .uj-feladat {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .uj-feladat button {
+    width: 100%;
+  }
+
+
+
+}
